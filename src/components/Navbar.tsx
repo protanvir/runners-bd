@@ -55,10 +55,10 @@ export default function Navbar() {
                                     <div className="flex items-center gap-2 text-gray-300">
                                         <img
                                             className="h-8 w-8 rounded-full border-2 border-orange-500"
-                                            src={user.user_metadata.avatar_url || `https://ui-avatars.com/api/?name=${user.email}`}
+                                            src={user?.user_metadata?.avatar_url || `https://ui-avatars.com/api/?name=${user?.email}`}
                                             alt="User avatar"
                                         />
-                                        <span className="text-sm font-medium">{user.user_metadata.full_name || user.email}</span>
+                                        <span className="text-sm font-medium">{user?.user_metadata?.full_name || user?.email}</span>
                                     </div>
                                     <button
                                         onClick={() => signOut()}

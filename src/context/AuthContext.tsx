@@ -49,6 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const refreshSession = async () => {
         try {
             const { data } = await insforge.auth.getCurrentSession();
+            console.log('InsForge Session Data:', data);
             if (data?.session) {
                 // Map SDK response to our Type if needed, or cast it
                 setSession(data.session as unknown as Session);
@@ -62,6 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setSession(null);
             setUser(null);
         } finally {
+            console.log('Session refresh completed', { sessionExists: !!session, userExists: !!user });
             setLoading(false);
         }
     };
