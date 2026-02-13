@@ -59,7 +59,7 @@ export default function Forums() {
             setLoading(true);
             const { data, error } = await insforge.database
                 .from('forum_posts')
-                .select('*, author:profiles(full_name, avatar_url)')
+                .select('*, author:profiles!forum_posts_author_id_fkey(full_name, avatar_url)')
                 .eq('category_id', categoryId)
                 .order('created_at', { ascending: false });
 

@@ -38,7 +38,7 @@ export default function Events() {
         try {
             const { data, error } = await insforge.database
                 .from('events')
-                .select('*, organizer:profiles(full_name, avatar_url)')
+                .select('*, organizer:profiles!events_organizer_id_fkey(full_name, avatar_url)')
                 .order('event_date', { ascending: true });
 
             if (error) throw error;

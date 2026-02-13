@@ -41,7 +41,7 @@ export default function GearReviews() {
             setLoading(true);
             const { data, error } = await insforge.database
                 .from('gear_reviews')
-                .select('*, author:profiles(full_name, avatar_url)')
+                .select('*, author:profiles!gear_reviews_author_id_fkey(full_name, avatar_url)')
                 .order('created_at', { ascending: false });
 
             if (error) throw error;
