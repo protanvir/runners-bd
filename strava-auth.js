@@ -31,7 +31,8 @@ module.exports = async function (req) {
                     client_id: '38116',
                     client_secret: '376733ca08ac9989fc2c5a88c8a01fe63e7984a3',
                     code: code,
-                    grant_type: 'authorization_code'
+                    grant_type: 'authorization_code',
+                    redirect_uri: redirect_uri
                 })
             });
             tokenResponse = await response.json();
