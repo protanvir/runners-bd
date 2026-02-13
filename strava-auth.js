@@ -10,7 +10,7 @@ module.exports = async function (req) {
     }
 
     try {
-        const { code, refresh_token } = await req.json();
+        const { code, refresh_token, redirect_uri } = await req.json();
 
         // Get secrets from environment
         // const clientId = Deno.env.get('STRAVA_CLIENT_ID');

@@ -61,7 +61,10 @@ export default function Profile() {
 
             // Exchange token via Edge Function
             const { data, error } = await insforge.functions.invoke('strava-auth', {
-                body: { code }
+                body: {
+                    code,
+                    redirect_uri: `${window.location.origin}/profile`
+                }
             });
 
             if (error) throw error;
