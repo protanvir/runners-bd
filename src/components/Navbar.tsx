@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, User, LogOut, Calendar, MessageSquare, Award, BookOpen, Map } from 'lucide-react';
+import { Menu, X, User, LogOut, Calendar, MessageSquare, Award, BookOpen, Map, ShoppingBag } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -15,6 +15,7 @@ export default function Navbar() {
         { name: 'Forums', path: '/forums', icon: <MessageSquare className="w-5 h-5" /> },
         { name: 'Training', path: '/training', icon: <BookOpen className="w-5 h-5" /> },
         { name: 'Leaderboard', path: '/leaderboard', icon: <Award className="w-5 h-5" /> },
+        { name: 'Gear Reviews', path: '/gear-reviews', icon: <ShoppingBag className="w-5 h-5" /> },
         { name: 'Routes', path: '/routes', icon: <Map className="w-5 h-5" /> },
     ];
 
