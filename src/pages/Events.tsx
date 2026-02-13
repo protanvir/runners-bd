@@ -107,7 +107,7 @@ export default function Events() {
                     <h1 className="text-3xl font-bold text-white">Events</h1>
                     <p className="text-gray-400">Join local runs and races</p>
                 </div>
-                {user && (
+                {user && user.profile?.can_create_event !== false && (
                     <button
                         onClick={() => setShowCreateForm(true)}
                         className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition flex items-center gap-2"

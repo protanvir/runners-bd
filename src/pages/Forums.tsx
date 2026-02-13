@@ -117,7 +117,7 @@ export default function Forums() {
                             <h2 className="text-2xl font-bold text-white mb-1">{selectedCategory.name}</h2>
                             <p className="text-gray-400">{selectedCategory.description}</p>
                         </div>
-                        {user && (
+                        {user && user.profile?.can_create_post !== false && (
                             <button
                                 onClick={() => setShowCreatePost(true)}
                                 className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition flex items-center gap-2"

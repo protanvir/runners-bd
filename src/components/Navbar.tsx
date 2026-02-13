@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, User, LogOut, Calendar, MessageSquare, Award, BookOpen, Map, ShoppingBag } from 'lucide-react';
+import { Menu, X, User, LogOut, Calendar, MessageSquare, Award, BookOpen, Map, ShoppingBag, Shield } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -46,6 +46,18 @@ export default function Navbar() {
                                         {link.name}
                                     </Link>
                                 ))}
+                                {user?.profile?.role === 'superadmin' && (
+                                    <Link
+                                        to="/admin"
+                                        className={`px-3 py-2 rounded-md text-sm font-bold flex items-center gap-2 transition-colors ${isActive('/admin')
+                                            ? 'bg-gray-800 text-orange-500'
+                                            : 'text-orange-500 hover:bg-gray-700 hover:text-white'
+                                            }`}
+                                    >
+                                        <Shield className="w-5 h-5" />
+                                        Admin
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>

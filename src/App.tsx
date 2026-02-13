@@ -7,6 +7,8 @@ import Forums from './pages/Forums';
 import Leaderboard from './pages/Leaderboard';
 import Training from './pages/Training';
 import GearReviews from './pages/GearReviews';
+import AdminDashboard from './pages/AdminDashboard';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <Route path="training" element={<Training />} />
           <Route path="leaderboard" element={<Leaderboard />} />
           <Route path="gear-reviews" element={<GearReviews />} />
+          <Route path="admin" element={<AdminDashboard />} />
           <Route path="routes" element={<div className="text-center mt-20 text-2xl text-gray-500">Route Database - Coming Soon</div>} />
         </Route>
       </Routes>

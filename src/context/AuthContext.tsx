@@ -10,6 +10,10 @@ export interface User {
         name?: string;
         avatar_url?: string;
         bio?: string;
+        role?: 'user' | 'superadmin';
+        can_create_event?: boolean;
+        can_create_review?: boolean;
+        can_create_post?: boolean;
         [key: string]: any;
     };
     user_metadata?: any; // Fallback
@@ -52,8 +56,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             console.log('InsForge Session Data:', data);
             if (data?.session) {
                 // Map SDK response to our Type if needed, or cast it
-                setSession(data.session as unknown as Session);
-                setUser(data.session.user as unknown as User);
+
+                // Fetch profile data to get role and permissions
+                const { data: profile } = await insforge.database
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', data.session.user.id)
+                    .single();
+
+                const sessionWithProfile = {
+                    ...data.session,
+                    user: {
+                        ...data.session.user,
+                        profile: {
+                            ...data.session.user.profile,
+                            ...profile
+                        }
+                    }
+                };
+
+                setSession(sessionWithProfile as unknown as Session);
+                setUser(sessionWithProfile.user as unknown as User);
             } else {
                 setSession(null);
                 setUser(null);

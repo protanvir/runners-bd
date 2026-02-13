@@ -100,7 +100,7 @@ export default function GearReviews() {
                             className="pl-10 pr-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-orange-500 w-full"
                         />
                     </div>
-                    {user && (
+                    {user && user.profile?.can_create_review !== false && (
                         <button
                             onClick={() => setShowCreateForm(true)}
                             className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition flex items-center gap-2 shrink-0"
