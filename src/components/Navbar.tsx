@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function Navbar() {
     const { user, signInWithGoogle, signOut } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
     const location = useLocation();
 
     const navLinks = [
@@ -64,22 +65,39 @@ export default function Navbar() {
                     <div className="hidden md:block">
                         <div className="ml-4 flex items-center md:ml-6">
                             {user ? (
-                                <div className="flex items-center gap-4">
-                                    <div className="flex items-center gap-2 text-gray-300">
+                                <div className="relative">
+                                    <button
+                                        onClick={() => setIsProfileOpen(!isProfileOpen)}
+                                        className="flex items-center gap-2 text-gray-300 hover:text-white focus:outline-none"
+                                    >
                                         <img
                                             className="h-8 w-8 rounded-full border-2 border-orange-500"
                                             src={user?.user_metadata?.avatar_url || `https://ui-avatars.com/api/?name=${user?.email}`}
                                             alt="User avatar"
                                         />
                                         <span className="text-sm font-medium">{user?.user_metadata?.full_name || user?.email}</span>
-                                    </div>
-                                    <button
-                                        onClick={() => signOut()}
-                                        className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
-                                        title="Sign Out"
-                                    >
-                                        <LogOut className="w-5 h-5" />
                                     </button>
+
+                                    {isProfileOpen && (
+                                        <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-700">
+                                            <Link
+                                                to="/profile"
+                                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+                                                onClick={() => setIsProfileOpen(false)}
+                                            >
+                                                Your Profile
+                                            </Link>
+                                            <button
+                                                onClick={() => {
+                                                    setIsOpen(false);
+                                                    signOut();
+                                                }}
+                                                className="w-full text-left block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+                                            >
+                                                Sign out
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             ) : (
                                 <button
@@ -120,16 +138,26 @@ export default function Navbar() {
                             </Link>
                         ))}
                         {user ? (
-                            <button
-                                onClick={() => {
-                                    signOut();
-                                    setIsOpen(false);
-                                }}
-                                className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center gap-3"
-                            >
-                                <LogOut className="w-5 h-5" />
-                                Sign Out
-                            </button>
+                            <>
+                                <Link
+                                    to="/profile"
+                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center gap-3"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <User className="w-5 h-5" />
+                                    Your Profile
+                                </Link>
+                                <button
+                                    onClick={() => {
+                                        signOut();
+                                        setIsOpen(false);
+                                    }}
+                                    className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center gap-3"
+                                >
+                                    <LogOut className="w-5 h-5" />
+                                    Sign Out
+                                </button>
+                            </>
                         ) : (
                             <button
                                 onClick={() => {
